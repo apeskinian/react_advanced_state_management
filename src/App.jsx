@@ -68,7 +68,9 @@ function App() {
   }
 
   return (
-    <CartContext>
+    // NOTE: the use of .Provider after CartContext below is for React v18 or less
+    // In v19 you can just use CartContext
+    <CartContext.Provider value={{ items: [] }}>
       <Header
         cart={shoppingCart}
         onUpdateCartItemQuantity={handleUpdateCartItemQuantity}
@@ -80,7 +82,7 @@ function App() {
           </li>
         ))}
       </Shop>
-    </CartContext>
+    </CartContext.Provider>
   );
 }
 
