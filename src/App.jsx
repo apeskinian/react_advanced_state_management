@@ -67,18 +67,22 @@ function App() {
     });
   }
 
+  // setting the context values and exposing state and functions to components that can access the context
+  const ctxValue = {
+    items: shoppingCart.items,
+    addItemToCart: handleAddItemToCart,
+    updateItemQuantity: handleUpdateCartItemQuantity
+  }
+
   return (
     // NOTE: the use of .Provider after CartContext below is for React v18 or less
     // In v19 you can just use CartContext
-    <CartContext.Provider value={{ items: [] }}>
-      <Header
-        cart={shoppingCart}
-        onUpdateCartItemQuantity={handleUpdateCartItemQuantity}
-      />
+    <CartContext.Provider value={ctxValue}>
+      <Header />
       <Shop>
         {DUMMY_PRODUCTS.map((product) => (
           <li key={product.id}>
-            <Product {...product} onAddToCart={handleAddItemToCart} />
+            <Product {...product} />
           </li>
         ))}
       </Shop>
